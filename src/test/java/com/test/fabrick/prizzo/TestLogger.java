@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class TestLogger {
         logDirectory = path;
     }
 
-    private void logToJson(String level, String message) {
+    private void logToJson(String level, String message) throws JSONException {
         JSONObject logEntry = new JSONObject();
         logEntry.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
         logEntry.put("level", level);
@@ -37,7 +38,7 @@ public class TestLogger {
         saveLogsToFile();
     }
 
-    private void saveLogsToFile() {
+    private void saveLogsToFile() throws JSONException {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         String logFileName = LOG_FILE_PREFIX + " - " + timestamp + LOG_FILE_EXTENSION;
         String logFilePath = Paths.get(logDirectory, logFileName).toString();
@@ -50,22 +51,22 @@ public class TestLogger {
         }
     }
 
-    public void info(String message) {
+    public void info(String message) throws JSONException {
         logger.info(message);
         logToJson("INFO", message);
     }
     
-    public void warn(String message) {
+    public void warn(String message) throws JSONException {
         logger.warn(message);
         logToJson("WARN", message);
     }
     
-    public void error(String message) {
+    public void error(String message) throws JSONException {
         logger.error(message);
         logToJson("ERROR", message);
     }
     
-    public void debug(String message) {
+    public void debug(String message) throws JSONException {
         logger.debug(message);
         logToJson("DEBUG", message);
     }
