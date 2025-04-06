@@ -1,4 +1,4 @@
-package com.test.fabrick.prizzo;
+package com.test.fabrick.utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class TestLogger {
 	
 	private static Logger logger = null;
     private static JSONArray logArray = new JSONArray();
-    private static final String LOG_FILE_PREFIX = "logs";
-    private static final String LOG_FILE_EXTENSION = ".json";
+    private static final String LOG_FILE_PREFIX = "log";
+    private static final String LOG_FILE_EXTENSION = ".txt";
     private static String logDirectory = "target/logs"; 
 
     public TestLogger(Class<?> clazz) {
@@ -42,6 +42,8 @@ public class TestLogger {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         String logFileName = LOG_FILE_PREFIX + " - " + timestamp + LOG_FILE_EXTENSION;
         String logFilePath = Paths.get(logDirectory, logFileName).toString();
+        
+        System.err.println(logFilePath);
         
         try (FileWriter file = new FileWriter(logFilePath)) {
             file.write(logArray.toString(4)); 
