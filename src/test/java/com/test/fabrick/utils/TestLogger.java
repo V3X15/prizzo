@@ -1,4 +1,4 @@
-package com.test.fabrick.prizzo;
+package com.test.fabrick.utils;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.test.fabrick.prizzo;
+package com.test.fabrick.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,13 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.test.fabrick.utils.TestLogger;
+
 @SpringBootTest()
 public class FabrickControllerTest {
 
     @Autowired
-    private FabrickService service;
+    private FabrickController controller;
 
     private static final String ACCOUNT_ID = "14537780";
+    
     private static final TestLogger tLogger = new TestLogger(FabrickControllerTest.class);  // loggin + scrittura su file
     private static final Logger logger = LoggerFactory.getLogger(FabrickControllerTest.class);
 
@@ -28,7 +31,7 @@ public class FabrickControllerTest {
     public void testBalance() throws Exception {
     	try {
     		
-	        ResponseEntity<String> response = service.getBalance(ACCOUNT_ID);
+	        ResponseEntity<String> response = controller.getBalance(ACCOUNT_ID);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        JSONObject jsonResponse = new JSONObject(response.getBody());
@@ -43,7 +46,7 @@ public class FabrickControllerTest {
     public void testBalanceInMemory() throws Exception {
     	try {
     		
-	        ResponseEntity<String> response = service.getBalance(ACCOUNT_ID);
+	        ResponseEntity<String> response = controller.getBalance(ACCOUNT_ID);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        JSONObject jsonResponse = new JSONObject(response.getBody());
@@ -60,7 +63,7 @@ public class FabrickControllerTest {
 	        String fromAccountingDate = "2019-01-01";
 	        String toAccountingDate   = "2019-12-01";
 	        		
-	        ResponseEntity<String> response = service.getTransactions(ACCOUNT_ID, fromAccountingDate, toAccountingDate);
+	        ResponseEntity<String> response = controller.getTransactions(ACCOUNT_ID, fromAccountingDate, toAccountingDate);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        JSONObject jsonResponse = new JSONObject(response.getBody());
@@ -80,7 +83,7 @@ public class FabrickControllerTest {
 	        String fromAccountingDate = "2019-01-01";
 	        String toAccountingDate   = "2019-12-01";
 	        		
-	        ResponseEntity<String> response = service.getTransactions(ACCOUNT_ID, fromAccountingDate, toAccountingDate);
+	        ResponseEntity<String> response = controller.getTransactions(ACCOUNT_ID, fromAccountingDate, toAccountingDate);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        JSONObject jsonResponse = new JSONObject(response.getBody());
@@ -115,7 +118,7 @@ public class FabrickControllerTest {
 	
 	        logger.debug("Request body: {}", request);
 	
-	        ResponseEntity<String> response = service.makeMoneyTransfer(ACCOUNT_ID, request);
+	        ResponseEntity<String> response = controller.makeMoneyTransfer(ACCOUNT_ID, request);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        logger.debug("Response della chiamata /moneyTransfer : \n {}", response.getBody());
@@ -146,7 +149,7 @@ public class FabrickControllerTest {
 	
 	        tLogger.debug("Request body: " + request);
 	
-	        ResponseEntity<String> response = service.makeMoneyTransfer(ACCOUNT_ID, request);
+	        ResponseEntity<String> response = controller.makeMoneyTransfer(ACCOUNT_ID, request);
 	        assertEquals(HttpStatus.OK, response.getStatusCode());
 	
 	        tLogger.debug("Response della chiamata moneyTransfer : " + response.getBody());
