@@ -2,8 +2,6 @@ package com.test.fabrick.controller;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +18,6 @@ import com.test.fabrick.service.FabrickService;
 public class FabrickController {
 
     private final FabrickService fabrickService;
-    private static final Logger logger = LoggerFactory.getLogger(FabrickService.class);
-
     public FabrickController(FabrickService fabrickService) {
         this.fabrickService = fabrickService;
     }

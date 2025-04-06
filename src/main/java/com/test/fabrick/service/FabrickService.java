@@ -70,7 +70,6 @@ public class FabrickService {
             ResponseEntity<String> response = restTemplate.exchange(url, method, entity, String.class);
             if (response.getStatusCode() == HttpStatus.OK) {
             	 logger.info("STATUS CODE: " + response.getStatusCode());
-            	 logger.info("RESPONSE CHIAMATA : " + response.toString());
                 return ResponseEntity.ok(response.getBody());
             } else {
                 return ResponseEntity.status(response.getStatusCode()).body("Errore nella richiesta.");
